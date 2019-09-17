@@ -1,0 +1,7 @@
+10,F_CATEGORY.xml,t24-parameter-xml-csv,F_CATEGORY.SOURCE.csv
+20,FFRA_AA_P069.xml,t24-parameter-xml-csv,FFRA_AA_P069.SOURCE.csv
+30,FFRA_AA_P274.xml,t24-parameter-xml-csv,FFRA_AA_P247.SOURCE.csv
+40,FFRA_CURRENCY.xml,t24-parameter-xml-csv,FFRA_CURRENCY.SOURCE.csv
+50,FFRA_INDUSTRY.xml,t24-parameter-xml-csv,FFRA_INDUSTRY.SOURCE.csv
+60,FFRA_PERIODIC_INTEREST.xml,t24-parameter-xml-csv,FFRA_PERIODIC_INTEREST.SOURCE.xml
+70,F_LMM_INSTALL_CONDS.xml,t24-parameter-xml-csv,F_LMM_INSTALL_CONDS.SOURCE.xml
