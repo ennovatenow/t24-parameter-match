@@ -1,1 +1,3 @@
 10,setup.sql,sql
+20,copy-to-input.sh,sh
+30,T24_TABLE_MAP,smart-loader,t24_table_map.csv
