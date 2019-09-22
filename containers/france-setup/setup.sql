@@ -29,7 +29,7 @@ SELECT TABLE_NAME, COUNT(1) COUNT
 FROM   T24_PARAMETERS_DESTINATION
 GROUP  BY TABLE_NAME;
 CREATE OR REPLACE VIEW T24_PARAMETERS_EXCEPTIONS_VIEW AS
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
@@ -39,42 +39,49 @@ select s.table_name TABLE_NAME,
                 d.parameter_value, 'Match',
                 decode(d.parameter_value, null, 'Source has value, Destination has no value','MisMatch')) Message
 from   t24_parameters_source s,
-       t24_parameters_destination d
+       t24_parameters_destination d,
+       t24_table_map t
 where  s.table_name = d.table_name
+and    s.table_name = t.table_name
 and    s.parameter_name = d.parameter_name
 and    s.column_name = d.column_name
 and    NVL(s.m_value,'1') = NVL(d.m_value,'1')
 union
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Source has value, Destination has no value' Message
-from   t24_parameters_source s
+from   t24_parameters_source s,
+       t24_table_map t
 where  s.table_name not in ( select distinct d.table_name from t24_parameters_destination d )
+and    s.table_name = t.table_name
 union
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Source has value, Destination has no value' Message
-from   t24_parameters_source s
+from   t24_parameters_source s,
+       t24_table_map t
 where  not exists (
        select 1
        from   t24_parameters_destination d
        where  s.table_name = d.table_name
        and    s.parameter_name = d.parameter_name
        )
+and    s.table_name = t.table_name       
 union
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Source has value, Destination has no value' Message
-from   t24_parameters_source s
+from   t24_parameters_source s,
+       t24_table_map t
 where  not exists (
        select 1
        from   t24_parameters_destination d
@@ -82,42 +89,49 @@ where  not exists (
        and    s.parameter_name = d.parameter_name
        and    upper(s.column_name||NVL(s.m_value,'1')) = upper(d.column_name||NVL(d.m_value,'1'))
        )
-union ---------------------------------------------------------------------------------------------
-select s.table_name TABLE_NAME,
+and    s.table_name = t.table_name       
+union 
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Destination has value, Source has no value' Message
-from   t24_parameters_destination s
+from   t24_parameters_destination s,
+       t24_table_map t
 where  s.table_name not in ( select distinct d.table_name from t24_parameters_source d )
+and    s.table_name = t.table_name
 union
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Destination has value, Source has no value' Message
-from   t24_parameters_destination s
+from   t24_parameters_destination s,
+       t24_table_map t
 where  not exists (
        select 1
        from   t24_parameters_source d
        where  s.table_name = d.table_name
        and    s.parameter_name = d.parameter_name
        )
+and    s.table_name = t.table_name       
 union
-select s.table_name TABLE_NAME,
+select t.functional_name TABLE_NAME,
        s.parameter_name PARAMETER_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
        'Destination has value, Source has no value' Message
-from   t24_parameters_destination s
+from   t24_parameters_destination s,
+       t24_table_map t
 where  not exists (
        select 1
        from   t24_parameters_source d
        where  s.table_name = d.table_name
        and    s.parameter_name = d.parameter_name
        and    upper(s.column_name||NVL(s.m_value,'1')) = upper(d.column_name||NVL(d.m_value,'1'))
-       );
+       )
+and    s.table_name = t.table_name;
 
