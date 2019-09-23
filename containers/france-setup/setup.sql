@@ -140,3 +140,7 @@ where  not exists (
        )
 and    s.table_name = t.table_name;
 
+CREATE OR REPLACE VIEW T24_PARAMETERS_MISMATCH_VIEW AS
+SELECT * 
+FROM   T24_PARAMETERS_EXCEPTIONS_VIEW 
+WHERE  MESSAGE <> 'Match';
