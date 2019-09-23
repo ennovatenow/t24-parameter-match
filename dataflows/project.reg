@@ -1,5 +1,3 @@
-France,france
-India,india
-United Arab Emirates,uae
-Kuwait,kuwait
-Egypt,egypt
+Load Source Instance Parameters,france-load-source
+Load Target Instance Parameters,france-load-target
+Run Exception Report,france-run-report
