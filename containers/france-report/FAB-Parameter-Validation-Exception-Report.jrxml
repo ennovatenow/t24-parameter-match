@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FAB Parameter Validation - Exception Report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d82fb47-d8cc-466c-bc2f-c6343ad6225b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FAB Parameter Validation - Exception Report" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d82fb47-d8cc-466c-bc2f-c6343ad6225b">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="184"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="source" class="java.lang.String"/>
 	<parameter name="target" class="java.lang.String"/>
@@ -47,7 +47,7 @@
 					<text><![CDATA[Parameter Key]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="100" y="0" width="455" height="20" uuid="b58688e5-28f9-4b88-a41c-547207e25f53"/>
+					<reportElement x="100" y="0" width="702" height="20" uuid="b58688e5-28f9-4b88-a41c-547207e25f53"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -62,7 +62,7 @@
 	<title>
 		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="7bf6e074-2cc7-4dfc-ad32-b01f843a80de"/>
+				<reportElement x="0" y="0" width="802" height="20" uuid="7bf6e074-2cc7-4dfc-ad32-b01f843a80de"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -99,7 +99,7 @@
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{target}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy h.mm a">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
 				<reportElement x="100" y="60" width="200" height="20" uuid="f62ab60a-f03d-4425-a131-2027dd4484a0"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -116,21 +116,21 @@
 				<text><![CDATA[Column]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="fb5dc5f6-d93a-4986-95fe-15f9932ed636"/>
+				<reportElement x="200" y="0" width="200" height="20" uuid="fb5dc5f6-d93a-4986-95fe-15f9932ed636"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Source]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="edb4971b-2b29-42fe-8f14-55bd7d10a490"/>
+				<reportElement x="400" y="0" width="200" height="20" uuid="edb4971b-2b29-42fe-8f14-55bd7d10a490"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Target]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="100" height="20" uuid="a19fc9ee-491d-448c-a8ea-2c86d884e4bd"/>
+				<reportElement x="600" y="0" width="200" height="20" uuid="a19fc9ee-491d-448c-a8ea-2c86d884e4bd"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -146,17 +146,17 @@
 				<textFieldExpression><![CDATA[$F{C_VALUE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="c945d888-1211-44c8-9874-48cb4f741001"/>
+				<reportElement x="200" y="0" width="200" height="20" uuid="c945d888-1211-44c8-9874-48cb4f741001"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{SOURCE_PARAMETER_VALUE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="993778e2-bc36-4f06-be83-86101a85add3"/>
+				<reportElement x="400" y="0" width="200" height="20" uuid="993778e2-bc36-4f06-be83-86101a85add3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{DEST_PARAMETER_VALUE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="100" height="20" uuid="26b87316-fb90-4011-9402-33e53460b72f"/>
+				<reportElement x="600" y="0" width="200" height="20" uuid="26b87316-fb90-4011-9402-33e53460b72f"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{MESSAGE}]]></textFieldExpression>
 			</textField>
