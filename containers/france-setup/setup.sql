@@ -40,9 +40,9 @@ select t.functional_name TABLE_NAME,
        s.parameter_value source_parameter_value,
        d.parameter_value dest_parameter_value,
        decode(s.parameter_value,
-                null, decode(d.parameter_value, null, 'Match', 'Source has no value, Destination has value'),
+                null, decode(d.parameter_value, null, 'Match', 'Source has no value but Destination has a value'),
                 d.parameter_value, 'Match',
-                decode(d.parameter_value, null, 'Source has value, Destination has no value','MisMatch')) Message
+                decode(d.parameter_value, null, 'Source has a value but Destination has no value','Mismatch')) Message
 from   t24_parameters_source s,
        t24_parameters_destination d,
        t24_table_map t
@@ -57,7 +57,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Source has value, Destination has no value' Message
+       'Source has a value but Destination has no value' Message
 from   t24_parameters_source s,
        t24_table_map t
 where  s.table_name not in ( select distinct d.table_name from t24_parameters_destination d )
@@ -68,7 +68,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Source has value, Destination has no value' Message
+       'Source has a value but Destination has no value' Message
 from   t24_parameters_source s,
        t24_table_map t
 where  not exists (
@@ -84,7 +84,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Source has value, Destination has no value' Message
+       'Source has a value but Destination has no value' Message
 from   t24_parameters_source s,
        t24_table_map t
 where  not exists (
@@ -101,7 +101,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Destination has value, Source has no value' Message
+       'Destination has a value but Source has no value' Message
 from   t24_parameters_destination s,
        t24_table_map t
 where  s.table_name not in ( select distinct d.table_name from t24_parameters_source d )
@@ -112,7 +112,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Destination has value, Source has no value' Message
+       'Destination has a value but Source has no value' Message
 from   t24_parameters_destination s,
        t24_table_map t
 where  not exists (
@@ -128,7 +128,7 @@ select t.functional_name TABLE_NAME,
        upper(s.column_name||'M'||NVL(s.m_value,'1')) c_value,
        s.parameter_value source_parameter_value,
        null dest_parameter_value,
-       'Destination has value, Source has no value' Message
+       'Destination has a value but Source has no value' Message
 from   t24_parameters_destination s,
        t24_table_map t
 where  not exists (
