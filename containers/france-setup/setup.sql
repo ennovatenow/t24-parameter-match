@@ -138,9 +138,17 @@ where  not exists (
        and    s.parameter_name = d.parameter_name
        and    upper(s.column_name||NVL(s.m_value,'1')) = upper(d.column_name||NVL(d.m_value,'1'))
        )
-and    s.table_name = t.table_name;
+and    s.table_name = t.table_name;,218,0,218
 
 CREATE OR REPLACE VIEW T24_PARAMETERS_MISMATCH_VIEW AS
 SELECT * 
 FROM   T24_PARAMETERS_EXCEPTIONS_VIEW 
 WHERE  MESSAGE <> 'Match';
+
+CREATE OR REPLACE VIEW T24_PARAMETERS_SUMMARY_VIEW AS
+SELECT TABLE_NAME, 
+       SUM(DECODE(UPPER(MESSAGE), 'MATCH', 1,0)) "Matched", 
+       SUM(DECODE(UPPER(MESSAGE), 'MATCH', 0,1)) "Unmatched", 
+       COUNT(1) "Total"
+FROM   T24_PARAMETERS_EXCEPTIONS_VIEW
+GROUP BY TABLE_NAME;
