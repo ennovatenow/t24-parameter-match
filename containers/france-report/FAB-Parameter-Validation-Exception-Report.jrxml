@@ -10,6 +10,12 @@
 			<style mode="Opaque" forecolor="#404040" backcolor="#FF0000" isBold="true"/>
 		</conditionalStyle>
 	</style>
+	<subDataset name="Exceptions-Summary" uuid="b0128de0-8298-4930-881a-22dc834a4378">
+		<field name="TABLE_NAME" class="java.lang.String"/>
+		<field name="MATCHED" class="java.lang.String"/>
+		<field name="UNMATCHED" class="java.lang.String"/>
+		<field name="TOTAL" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="source" class="java.lang.String"/>
 	<parameter name="target" class="java.lang.String"/>
 	<queryString>
@@ -21,6 +27,14 @@
 	<field name="SOURCE_PARAMETER_VALUE" class="java.lang.String"/>
 	<field name="DEST_PARAMETER_VALUE" class="java.lang.String"/>
 	<field name="MESSAGE" class="java.lang.String"/>
+	<variable name="MatchedParameterColumns" class="java.lang.Integer" resetType="Group" resetGroup="ParameterGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{MESSAGE}.equalsIgnoreCase('Match') ? 1: 0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="MatchedTableCount" class="java.lang.Integer" resetType="Group" resetGroup="TableNameGroup" incrementType="Group" incrementGroup="ParameterGroup" calculation="Sum">
+		<variableExpression><![CDATA[$V{MatchedParameterColumns}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<group name="TableNameGroup">
 		<groupExpression><![CDATA[$F{TABLE_NAME}]]></groupExpression>
 		<groupHeader>
@@ -28,7 +42,7 @@
 				<staticText>
 					<reportElement x="0" y="0" width="100" height="20" uuid="7b6454b9-3c64-4aec-8d77-45b6dd4799da">
 						<property name="net.sf.jasperreports.export.xls.break.before.row" value="true"/>
-						<propertyExpression name="net.sf.jasperreports.export.xls.sheet.name"><![CDATA[$F{TABLE_NAME}]]></propertyExpression>
+						<propertyExpression name="net.sf.jasperreports.export.xls.sheet.name"><![CDATA[$F{TABLE_NAME} ]]></propertyExpression>
 					</reportElement>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
@@ -57,7 +71,7 @@
 					<text><![CDATA[Parameter Key]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="100" y="0" width="702" height="20" uuid="b58688e5-28f9-4b88-a41c-547207e25f53"/>
+					<reportElement x="100" y="0" width="700" height="20" uuid="b58688e5-28f9-4b88-a41c-547207e25f53"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -98,9 +112,11 @@
 		<band height="50"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="81" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FFFFFF" backcolor="#0000FF" uuid="7bf6e074-2cc7-4dfc-ad32-b01f843a80de"/>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FFFFFF" backcolor="#0000FF" uuid="7bf6e074-2cc7-4dfc-ad32-b01f843a80de">
+					<property name="net.sf.jasperreports.export.xls.sheet.name" value="Summary"/>
+				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
